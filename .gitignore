@@ -4,7 +4,11 @@
 *.iml
 build/
 **/build/
+app/release/
 local.properties
+.env
+.env.*
+!.env.example
 .cxx/
 .externalNativeBuild/
 captures/
