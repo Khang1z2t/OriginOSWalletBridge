@@ -1,27 +1,70 @@
-# OriginOS Wallet Bridge V2
+# OriginOS Wallet Bridge
 
-V2 receives the OriginOS implicit action `vivo.intent.action.NFC_BASEAPP_SWIPE_ACTIVITY`, starts the verified Google Wallet activity, then finishes. It has no AccessibilityService, NFC routing, Wallet Role changes, background service, Shizuku, polling, or WakeLock.
+[Tieng Viet](README.vi.md)
 
-`applicationId` and handler component remain `com.originos.walletbridge/.IntentTestActivity` so an already saved Android default handler remains valid across an in-place update.
+OriginOS Wallet Bridge is a small, independent Android app for compatible OriginOS devices. It lets Android route Vivo's double-press Power shortcut to Google Wallet through the verified implicit action `vivo.intent.action.NFC_BASEAPP_SWIPE_ACTIVITY`.
 
-## Test
+## How It Works
 
-Install only after approval. Test unlocked, lock screen, USB/Wireless Debugging off, Recent Apps removal, and reboot separately. Do not expect a resolver at lock screen. Google Wallet may still reject a foreground launch before unlock; V2 does not bypass Keyguard.
+1. OriginOS sends its double-press Power implicit intent.
+2. Android routes it to the default handler chosen in Resolver.
+3. OriginOS Wallet Bridge starts Google Wallet in its own task and finishes.
 
-```powershell
-adb shell cmd package resolve-activity --brief -a vivo.intent.action.NFC_BASEAPP_SWIPE_ACTIVITY -c android.intent.category.DEFAULT
+The app does not modify NFC payment routing, Wallet Role, Vivo packages, or system settings.
+
+## Features
+
+- No AccessibilityService, root, Shizuku, background service, polling, or WakeLock.
+- Keeps Google Wallet in its own Recents task.
+- Uses one lightweight Android framework Activity.
+- Does not require USB Debugging or Wireless Debugging after installation.
+
+## Compatibility
+
+Verified device: iQOO 15T running OriginOS 7.
+
+Other OriginOS devices are unverified. The device must dispatch the Vivo shortcut as the same implicit action and show Android Resolver for compatible handlers.
+
+## Install And Setup
+
+1. Install a signed release APK, or a debug APK for testing.
+2. Double-press Power.
+3. In Android Resolver, choose **OriginOS Wallet Bridge** then **Always**.
+4. Double-press Power again to open Google Wallet.
+
+The application ID and resolver Activity component are intentionally stable. Updating the APK with the same signing key preserves the selected default handler.
+
+## Use Google Wallet
+
+Set up cards and NFC payment in Google Wallet normally. This app only launches Google Wallet; it does not configure or alter NFC payment defaults.
+
+## Rollback To Vivo NFC Base App
+
+Open Android App Info for OriginOS Wallet Bridge and clear defaults, then double-press Power and choose **NFC Base App** in Resolver. Uninstalling OriginOS Wallet Bridge also removes its handler and returns the action to Vivo when it is the remaining handler.
+
+## Lock Screen Limitation
+
+This app does not bypass Keyguard or request lock-screen privileges. Whether Google Wallet is visible before unlock is controlled by OriginOS and Google Wallet. Test lock-screen behavior on your device.
+
+## Build From Source
+
+```bash
+./gradlew :app:assembleDebug
+./gradlew :app:assembleRelease
 ```
 
-Rollback: clear Wallet Bridge defaults in Android App Info, choose Vivo in Resolver, or uninstall V2. The original Accessibility V1 is preserved by Git tag `v0.1` and branch `main`.
+The release build enables R8 and resource shrinking. Without signing environment variables it produces an unsigned APK. To create an installable signed release, set `RELEASE_STORE_FILE`, `RELEASE_STORE_PASSWORD`, `RELEASE_KEY_ALIAS`, and `RELEASE_KEY_PASSWORD`.
 
-## Test
+## Privacy
 
-```powershell
-.\gradlew.bat assembleDebug
-adb install -r app\build\outputs\apk\debug\app-debug.apk
-adb logcat -s OriginOSWalletBridge
-```
+The app requests no runtime permissions and stores no user data. It does not read screen content, NFC payment data, cards, accounts, or banking-app data. It only receives the Vivo shortcut action and starts the explicit Google Wallet Activity.
 
-Unlocked test: enable service, choose Test Mode, then double-press power. Confirm `Vivo Wallet matched`. Switch to Bridge Mode and repeat; check `Google Wallet launch requested` and `Google Wallet foreground confirmed`.
+## Disclaimer
 
-Lock-screen test: wake and unlock first. This build logs `user locked` and skips app launch until Android reports user unlocked.
+This is an independent project. It is not affiliated with, endorsed by, or supported by Vivo, iQOO, Google, or Google Wallet. Use at your own risk and test before relying on it.
+
+## Author And License
+
+Author: Đinh Quốc Bảo Khang.
+
+Licensed under the [MIT License](LICENSE).
