@@ -3,38 +3,16 @@
         android:allowBackup="false"
         android:label="OriginOS Wallet Bridge"
         android:supportsRtl="true"
-        android:theme="@style/Theme.WalletBridge">
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
+        android:theme="@style/Theme.IntentBridge">
         <activity
             android:name=".IntentTestActivity"
             android:exported="true"
-            android:label="Wallet Bridge Intent Test">
+            android:label="OriginOS Wallet Bridge"
+            android:theme="@style/Theme.IntentBridge">
             <intent-filter>
                 <action android:name="vivo.intent.action.NFC_BASEAPP_SWIPE_ACTIVITY" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
-        <service
-            android:name=".WalletBridgeAccessibilityService"
-            android:exported="false"
-            android:label="OriginOS Wallet Bridge"
-            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
-            android:stopWithTask="false">
-            <intent-filter>
-                <action android:name="android.accessibilityservice.AccessibilityService" />
-            </intent-filter>
-            <meta-data
-                android:name="android.accessibilityservice"
-                android:resource="@xml/accessibility_service_config" />
-        </service>
     </application>
 </manifest>

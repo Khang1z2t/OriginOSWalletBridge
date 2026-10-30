@@ -1,4 +1,3 @@
 <resources>
     <string name="app_name">OriginOS Wallet Bridge</string>
-    <string name="accessibility_description">Detects only Vivo Wallet window changes, then optionally opens Google Wallet. Does not read screen content.</string>
 </resources>
