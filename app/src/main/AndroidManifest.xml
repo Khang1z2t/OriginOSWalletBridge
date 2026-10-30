@@ -13,6 +13,16 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".IntentTestActivity"
+            android:exported="true"
+            android:label="Wallet Bridge Intent Test">
+            <intent-filter>
+                <action android:name="vivo.intent.action.NFC_BASEAPP_SWIPE_ACTIVITY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <service
             android:name=".WalletBridgeAccessibilityService"
             android:exported="false"

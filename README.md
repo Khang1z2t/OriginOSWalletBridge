@@ -28,6 +28,19 @@ When Accessibility is enabled but service is not bound, dashboard shows `OriginO
 
 If `enabled_accessibility_services` becomes `null` or does not contain this component, OriginOS disabled permission. If it remains present but Bound services is empty, service was disconnected. If it remains bound but no Vivo match is logged, event delivery failed. If a match and launch request are logged but no confirmation arrives, it is an unconfirmed launch, not automatically a launch failure.
 
+## Implicit intent experiment
+
+Branch `experiment/implicit-intent` adds `IntentTestActivity` for the verified OriginOS action `vivo.intent.action.NFC_BASEAPP_SWIPE_ACTIVITY`. It only shows `Wallet Bridge Intent Test`; it never opens Google Wallet, accesses NFC, or reads payment data.
+
+Before device testing, turn Accessibility off manually so results cannot come from the existing bridge. Install only after approval, then inspect handler count without changing defaults:
+
+```powershell
+adb shell cmd package query-activities --brief -a vivo.intent.action.NFC_BASEAPP_SWIPE_ACTIVITY -c android.intent.category.DEFAULT
+adb shell cmd package resolve-activity --brief -a vivo.intent.action.NFC_BASEAPP_SWIPE_ACTIVITY -c android.intent.category.DEFAULT
+```
+
+If Android displays a resolver, do not select a default automatically. Uninstalling this experimental APK or switching back to tag `v0.1` removes the extra manifest handler.
+
 ## Test
 
 ```powershell
