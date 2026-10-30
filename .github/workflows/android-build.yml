@@ -20,6 +20,8 @@ jobs:
           distribution: temurin
           java-version: '21'
           cache: gradle
+      - name: Make Gradle Wrapper executable
+        run: chmod +x gradlew
       - name: Build debug APK
         run: ./gradlew --no-daemon :app:assembleDebug
       - name: Upload debug APK
