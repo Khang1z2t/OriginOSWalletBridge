@@ -1,6 +1,6 @@
 # OriginOS Wallet Bridge
 
-[Tieng Viet](README.vi.md)
+[Tiếng Việt](README.vi.md)
 
 OriginOS Wallet Bridge is a small, independent Android app for compatible OriginOS devices. It lets Android route Vivo's double-press Power shortcut to Google Wallet through the verified implicit action `vivo.intent.action.NFC_BASEAPP_SWIPE_ACTIVITY`.
 
