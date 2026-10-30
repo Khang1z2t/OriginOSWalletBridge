@@ -106,24 +106,21 @@ private fun WalletBridgeApp(
         readReliabilityState(context, enabled, snapshot.serviceConnected)
     }
 
-    when {
-        !enabled -> OnboardingScreen(openAccessibilitySettings)
-        else -> Dashboard(
-            snapshot = snapshot,
-            reliability = reliability,
-            openAccessibilitySettings = openAccessibilitySettings,
-            openBatterySettings = openBatterySettings,
-            openAppInfo = openAppInfo,
-            onModeChanged = {
-                BridgeStore.setBridgeMode(context, it)
-                snapshot = BridgeStore.snapshot(context)
-            },
-            onDiagnosticsChanged = {
-                BridgeStore.setDiagnosticsEnabled(context, it)
-                snapshot = BridgeStore.snapshot(context)
-            },
-        )
-    }
+    Dashboard(
+        snapshot = snapshot,
+        reliability = reliability,
+        openAccessibilitySettings = openAccessibilitySettings,
+        openBatterySettings = openBatterySettings,
+        openAppInfo = openAppInfo,
+        onModeChanged = {
+            BridgeStore.setBridgeMode(context, it)
+            snapshot = BridgeStore.snapshot(context)
+        },
+        onDiagnosticsChanged = {
+            BridgeStore.setDiagnosticsEnabled(context, it)
+            snapshot = BridgeStore.snapshot(context)
+        },
+    )
 }
 
 @Composable
