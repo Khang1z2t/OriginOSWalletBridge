@@ -18,7 +18,11 @@ class IntentTestActivity : Activity() {
         val walletIntent = Intent(Intent.ACTION_MAIN)
             .addCategory(Intent.CATEGORY_LAUNCHER)
             .setComponent(ComponentName(GOOGLE_WALLET_PACKAGE, GOOGLE_WALLET_ACTIVITY))
-            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            .addFlags(
+                Intent.FLAG_ACTIVITY_NEW_TASK or
+                    Intent.FLAG_ACTIVITY_CLEAR_TOP or
+                    Intent.FLAG_ACTIVITY_SINGLE_TOP,
+            )
 
         try {
             if (walletIntent.resolveActivity(packageManager) != null) {
