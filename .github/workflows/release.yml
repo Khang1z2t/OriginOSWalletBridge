@@ -52,28 +52,24 @@ jobs:
           RELEASE_KEY_ALIAS: ${{ secrets.RELEASE_KEY_ALIAS }}
           RELEASE_KEY_PASSWORD: ${{ secrets.RELEASE_KEY_PASSWORD }}
         run: ./gradlew --no-daemon :app:assembleRelease
-      - name: Create checksum
+      - name: Prepare release assets
         if: steps.existing.outputs.exists == 'false'
-        run: sha256sum app/build/outputs/apk/release/app-release.apk > OriginOS-Wallet-Bridge-${{ github.ref_name }}.sha256
+        env:
+          TAG_NAME: ${{ github.ref_name }}
+        run: |
+          VERSION="${TAG_NAME#v}"
+          APK="release-${VERSION}.apk"
+          mv app/build/outputs/apk/release/app-release.apk "$APK"
+          sha256sum "$APK" > "${APK}.sha256"
       - name: Create GitHub Release
         if: steps.existing.outputs.exists == 'false'
-        uses: softprops/action-gh-release@v2
-        with:
-          name: OriginOS Wallet Bridge ${{ github.ref_name }}
-          body: |
-            ## Thay đổi
-            - Hỗ trợ hai implicit shortcut action đã xác minh trên iQOO 15T / OriginOS 7:
-              - `vivo.intent.action.NFC_BASEAPP_SWIPE_ACTIVITY` (Vivo NFC Base App)
-              - `vivo.intent.action.NFC_BUS_SWINGSPLASH` (Vivo Wallet)
-            - Giữ nguyên handler component để không mất default Resolver đã chọn cho action cũ.
-            - Cập nhật adaptive launcher icon.
-
-            ## Tệp tải xuống
-            - `app-release.apk`: APK release đã ký.
-            - `OriginOS-Wallet-Bridge-*.sha256`: checksum SHA-256 của APK.
-            - `Source code (zip)`: GitHub tự tạo từ tag release.
-
-            Mỗi action mới cần chọn **OriginOS Wallet Bridge** → **Luôn luôn** một lần trong Android Resolver.
-          files: |
-            app/build/outputs/apk/release/app-release.apk
-            OriginOS-Wallet-Bridge-${{ github.ref_name }}.sha256
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG_NAME: ${{ github.ref_name }}
+        run: |
+          VERSION="${TAG_NAME#v}"
+          gh release create "$TAG_NAME" "release-${VERSION}.apk" "release-${VERSION}.apk.sha256" \
+            --repo "$GITHUB_REPOSITORY" \
+            --title "OriginOS Wallet Bridge $TAG_NAME" \
+            --notes-from-tag \
+            --verify-tag
