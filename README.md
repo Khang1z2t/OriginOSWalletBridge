@@ -2,7 +2,10 @@
 
 [Tiếng Việt](README.vi.md)
 
-OriginOS Wallet Bridge is a small, independent Android app for compatible OriginOS devices. It lets Android route Vivo's double-press Power shortcut to Google Wallet through the verified implicit action `vivo.intent.action.NFC_BASEAPP_SWIPE_ACTIVITY`.
+OriginOS Wallet Bridge is a small, independent Android app for compatible OriginOS devices. It lets Android route Vivo's double-press Power shortcut to Google Wallet through either verified implicit action:
+
+- `vivo.intent.action.NFC_BASEAPP_SWIPE_ACTIVITY` from Vivo NFC Base App (`com.vivo.nfcbaseapp`)
+- `vivo.intent.action.NFC_BUS_SWINGSPLASH` from Vivo Wallet (`com.vivo.wallet`)
 
 ## How It Works
 
@@ -23,14 +26,15 @@ The app does not modify NFC payment routing, Wallet Role, Vivo packages, or syst
 
 Verified device: iQOO 15T running OriginOS 7.
 
-Other OriginOS devices are unverified. The device must dispatch the Vivo shortcut as the same implicit action and show Android Resolver for compatible handlers.
+Other OriginOS devices are unverified. The device must dispatch either supported implicit action and show Android Resolver for compatible handlers.
 
 ## Install And Setup
 
 1. Install a signed release APK, or a debug APK for testing.
 2. Double-press Power.
 3. In Android Resolver, choose **OriginOS Wallet Bridge** then **Always**.
-4. Double-press Power again to open Google Wallet.
+4. If Vivo Wallet/NFC Base App changes which shortcut action it sends, repeat step 3 for that action.
+5. Double-press Power again to open Google Wallet.
 
 The application ID and resolver Activity component are intentionally stable. Updating the APK with the same signing key preserves the selected default handler.
 
@@ -38,9 +42,9 @@ The application ID and resolver Activity component are intentionally stable. Upd
 
 Set up cards and NFC payment in Google Wallet normally. This app only launches Google Wallet; it does not configure or alter NFC payment defaults.
 
-## Rollback To Vivo NFC Base App
+## Rollback To Vivo Handler
 
-Open Android App Info for OriginOS Wallet Bridge and clear defaults, then double-press Power and choose **NFC Base App** in Resolver. Uninstalling OriginOS Wallet Bridge also removes its handler and returns the action to Vivo when it is the remaining handler.
+Open Android App Info for OriginOS Wallet Bridge and clear defaults, then double-press Power and choose **NFC Base App** or **Vivo Wallet** in Resolver. Uninstalling OriginOS Wallet Bridge also removes its handler and returns each action to its Vivo handler when it is the remaining handler.
 
 ## Lock Screen Limitation
 

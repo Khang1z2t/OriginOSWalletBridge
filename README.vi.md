@@ -2,7 +2,10 @@
 
 [English](README.md)
 
-OriginOS Wallet Bridge là ứng dụng Android độc lập, nhẹ, dành cho thiết bị OriginOS tương thích. Ứng dụng cho phép Android chuyển shortcut nhấn đúp nút nguồn của Vivo sang Google Wallet qua implicit Intent đã xác minh: `vivo.intent.action.NFC_BASEAPP_SWIPE_ACTIVITY`.
+OriginOS Wallet Bridge là ứng dụng Android độc lập, nhẹ, dành cho thiết bị OriginOS tương thích. Ứng dụng cho phép Android chuyển shortcut nhấn đúp nút nguồn của Vivo sang Google Wallet qua hai implicit Intent đã xác minh:
+
+- `vivo.intent.action.NFC_BASEAPP_SWIPE_ACTIVITY` từ Vivo NFC Base App (`com.vivo.nfcbaseapp`)
+- `vivo.intent.action.NFC_BUS_SWINGSPLASH` từ Vivo Wallet (`com.vivo.wallet`)
 
 ## Cách Hoạt Động
 
@@ -23,14 +26,15 @@ OriginOS Wallet Bridge là ứng dụng Android độc lập, nhẹ, dành cho t
 
 Đã kiểm chứng: iQOO 15T chạy OriginOS 7.
 
-Các thiết bị OriginOS khác chưa được kiểm chứng. Thiết bị phải gửi cùng implicit action của Vivo và hiện Android Resolver cho handler tương thích.
+Các thiết bị OriginOS khác chưa được kiểm chứng. Thiết bị phải gửi một trong hai implicit action đã hỗ trợ và hiện Android Resolver cho handler tương thích.
 
 ## Cài Đặt Và Thiết Lập
 
 1. Cài APK release đã ký, hoặc APK debug để thử nghiệm.
 2. Nhấn đúp nút nguồn.
 3. Trong Android Resolver, chọn **OriginOS Wallet Bridge** rồi chọn **Luôn luôn**.
-4. Nhấn đúp nút nguồn lần nữa để mở Google Wallet.
+4. Nếu Vivo Wallet/NFC Base App đổi shortcut action đang gửi, lặp lại bước 3 cho action đó.
+5. Nhấn đúp nút nguồn lần nữa để mở Google Wallet.
 
 `applicationId` và Activity handler được giữ ổn định. Cập nhật APK cùng signing key sẽ giữ lựa chọn handler mặc định.
 
@@ -38,9 +42,9 @@ Các thiết bị OriginOS khác chưa được kiểm chứng. Thiết bị ph�
 
 Thêm thẻ và cấu hình thanh toán NFC trong Google Wallet như bình thường. Ứng dụng này chỉ mở Google Wallet, không cấu hình hay thay đổi NFC payment default.
 
-## Khôi Phục Vivo NFC Base App
+## Khôi Phục Handler Vivo
 
-Mở Android App Info của OriginOS Wallet Bridge và clear defaults. Nhấn đúp nút nguồn, sau đó chọn **NFC Base App** trong Resolver. Gỡ cài đặt OriginOS Wallet Bridge cũng xóa handler của nó và trả action về Vivo khi Vivo là handler còn lại.
+Mở Android App Info của OriginOS Wallet Bridge và clear defaults. Nhấn đúp nút nguồn, sau đó chọn **NFC Base App** hoặc **Vivo Wallet** trong Resolver. Gỡ cài đặt OriginOS Wallet Bridge cũng xóa handler và trả từng action về handler Vivo còn lại.
 
 ## Giới Hạn Màn Hình Khóa
 

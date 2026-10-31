@@ -15,6 +15,10 @@
                 <action android:name="vivo.intent.action.NFC_BASEAPP_SWIPE_ACTIVITY" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="vivo.intent.action.NFC_BUS_SWINGSPLASH" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
         <meta-data
             android:name="com.originos.walletbridge.author"

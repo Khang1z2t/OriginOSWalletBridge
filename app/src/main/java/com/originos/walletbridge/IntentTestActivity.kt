@@ -10,7 +10,7 @@ import android.util.Log
 class IntentTestActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (intent?.action != VIVO_SWIPE_ACTION) {
+        if (intent?.action !in VIVO_SWIPE_ACTIONS) {
             finish()
             return
         }
@@ -40,7 +40,10 @@ class IntentTestActivity : Activity() {
     }
 
     private companion object {
-        const val VIVO_SWIPE_ACTION = "vivo.intent.action.NFC_BASEAPP_SWIPE_ACTIVITY"
+        val VIVO_SWIPE_ACTIONS = setOf(
+            "vivo.intent.action.NFC_BASEAPP_SWIPE_ACTIVITY",
+            "vivo.intent.action.NFC_BUS_SWINGSPLASH",
+        )
         const val GOOGLE_WALLET_PACKAGE = "com.google.android.apps.walletnfcrel"
         const val GOOGLE_WALLET_ACTIVITY = "com.google.commerce.tapandpay.android.wallet.WalletActivity"
         const val TAG = "OriginOSWalletBridge"
