@@ -21,6 +21,13 @@ The app does not modify NFC payment routing, Wallet Role, Vivo packages, or syst
 - Keeps Google Wallet in its own Recents task.
 - Uses one lightweight Android framework Activity.
 - Does not require USB Debugging or Wireless Debugging after installation.
+- Adaptive launcher icon: red shortcut ring and floating dot on a soft light background.
+
+## V1.1
+
+- Handles both verified OriginOS shortcut actions: NFC Base App and Vivo Wallet.
+- Keeps the same application ID and resolver Activity, preserving existing defaults for the original action.
+- A newly detected shortcut action needs its own one-time **Always** choice in Android Resolver.
 
 ## Compatibility
 

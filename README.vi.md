@@ -21,6 +21,13 @@ OriginOS Wallet Bridge là ứng dụng Android độc lập, nhẹ, dành cho t
 - Google Wallet nằm trong task Recents riêng.
 - Chỉ dùng một Android framework Activity nhẹ.
 - Không cần USB Debugging hoặc Wireless Debugging sau khi cài đặt.
+- Adaptive launcher icon: vòng shortcut đỏ và chấm nổi trên nền sáng dịu.
+
+## V1.1
+
+- Nhận cả hai shortcut action OriginOS đã xác minh: NFC Base App và Vivo Wallet.
+- Giữ nguyên application ID và Activity Resolver, nên default đã chọn cho action cũ vẫn được bảo toàn.
+- Mỗi shortcut action mới cần chọn **Luôn luôn** một lần trong Android Resolver.
 
 ## Tương Thích
 
