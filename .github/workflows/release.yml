@@ -59,6 +59,21 @@ jobs:
         if: steps.existing.outputs.exists == 'false'
         uses: softprops/action-gh-release@v2
         with:
+          name: OriginOS Wallet Bridge ${{ github.ref_name }}
+          body: |
+            ## Thay đổi
+            - Hỗ trợ hai implicit shortcut action đã xác minh trên iQOO 15T / OriginOS 7:
+              - `vivo.intent.action.NFC_BASEAPP_SWIPE_ACTIVITY` (Vivo NFC Base App)
+              - `vivo.intent.action.NFC_BUS_SWINGSPLASH` (Vivo Wallet)
+            - Giữ nguyên handler component để không mất default Resolver đã chọn cho action cũ.
+            - Cập nhật adaptive launcher icon.
+
+            ## Tệp tải xuống
+            - `app-release.apk`: APK release đã ký.
+            - `OriginOS-Wallet-Bridge-*.sha256`: checksum SHA-256 của APK.
+            - `Source code (zip)`: GitHub tự tạo từ tag release.
+
+            Mỗi action mới cần chọn **OriginOS Wallet Bridge** → **Luôn luôn** một lần trong Android Resolver.
           files: |
             app/build/outputs/apk/release/app-release.apk
             OriginOS-Wallet-Bridge-${{ github.ref_name }}.sha256
