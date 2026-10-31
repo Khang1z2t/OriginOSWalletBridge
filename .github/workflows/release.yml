@@ -69,7 +69,6 @@ jobs:
         run: |
           VERSION="${TAG_NAME#v}"
           gh release create "$TAG_NAME" "release-${VERSION}.apk" "release-${VERSION}.apk.sha256" \
-            --repo "$GITHUB_REPOSITORY" \
             --title "OriginOS Wallet Bridge $TAG_NAME" \
             --notes-from-tag \
             --verify-tag
