@@ -68,7 +68,7 @@ Release bật R8 và resource shrinking. Nếu không đặt biến môi trườ
 
 ## Quyền Riêng Tư
 
-Ứng dụng không xin runtime permission và không lưu dữ liệu người dùng. Ứng dụng không đọc nội dung màn hình, dữ liệu thanh toán NFC, thẻ, tài khoản hay dữ liệu ứng dụng ngân hàng. Ứng dụng chỉ nhận Vivo shortcut action và mở Google Wallet Activity đã xác minh.
+Ứng dụng không xin runtime permission. Ứng dụng không đọc nội dung màn hình, dữ liệu thanh toán NFC, thẻ, tài khoản hay dữ liệu ứng dụng ngân hàng. Ứng dụng chỉ lưu timestamp đơn điệu để giới hạn spam shortcut. Bất kỳ ứng dụng nào cũng có thể gửi action đã hỗ trợ, nhưng extras đầu vào bị bỏ qua và ứng dụng chỉ mở Google Wallet Activity cố định.
 
 ## Tuyên Bố Miễn Trừ
 

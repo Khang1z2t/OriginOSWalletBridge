@@ -68,7 +68,7 @@ The release build enables R8 and resource shrinking. Without signing environment
 
 ## Privacy
 
-The app requests no runtime permissions and stores no user data. It does not read screen content, NFC payment data, cards, accounts, or banking-app data. It only receives the Vivo shortcut action and starts the explicit Google Wallet Activity.
+The app requests no runtime permissions. It does not read screen content, NFC payment data, cards, accounts, or banking-app data. It stores only a monotonic launch timestamp to rate-limit shortcut abuse. Any app can send a supported action, but the app ignores incoming extras and starts only the fixed Google Wallet Activity.
 
 ## Disclaimer
 
